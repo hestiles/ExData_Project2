@@ -8,3 +8,5 @@ library(dplyr)
 ##Filter to Baltimore
 Bal<- filter(NEI, fips=="24510")
 
+##sum by year & type
+Bal3<-aggregate(Emissions~year+type,Bal, sum)
