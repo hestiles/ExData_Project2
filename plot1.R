@@ -4,11 +4,12 @@ unzip("emissions.zip")
 NEI<-readRDS("summarySCC_PM25.rds")
 SCC<-readRDS("Source_Classification_Code.r")
 
-plot(NEI$year, NEI$Emissions)
-##Data by year
-library(dplyr)
-NEIbyYear<-NEI %>%
-        group_by(year, sum(Emissions))
 
-with(NEIbyYear, plot(year, sum(Emissions)))
-     
+##Data by year
+NEI2<-aggregate(NEI['Emissions'], by=NEI['year'], sum)
+
+
+##Create PNG file
+png(file="plot1.png", width=480, height=480)
+with(NEI2, plot(year, Emissions))
+dev.off()
