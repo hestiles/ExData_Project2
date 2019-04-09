@@ -10,3 +10,6 @@ Bal<- filter(NEI, fips=="24510")
 
 ##sum by year & type
 Bal3<-aggregate(Emissions~year+type,Bal, sum)
+
+library(ggplot2)
+qplot(year, Emissions, data=Bal3, facets=.~type)+geom_smooth()
