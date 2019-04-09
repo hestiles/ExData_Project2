@@ -12,4 +12,9 @@ Bal<- filter(NEI, fips=="24510")
 Bal3<-aggregate(Emissions~year+type,Bal, sum)
 
 library(ggplot2)
+
+
+##Create PNG file
+png(file="plot3.png", width=480, height=480)
 qplot(year, Emissions, data=Bal3, facets=.~type)+geom_smooth()
+dev.off()
