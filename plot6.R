@@ -21,8 +21,17 @@ MV2<-filter(MV, str_detect(SCC.Level.Two, "Vehicle"))
 codes<-unique(MV2$SCC)
 
 ##Filter data to rows for motor vehicles
-BALMV<-filter(Bal, SCC==codes)
-LAMV<-filter(LA, SCC==codes)
+BALMV<-filter(Bal, SCC%in%codes)
+LAMV<-filter(LA, SCC%in%codes)
 
-##Sum by year
-NEIMV2<-aggregate(Emissions~year,NEIMV, sum)
+combined<-rbind(BALMV, LAMV)
+
+
+##Sum by year and city
+LABAL<-aggregate(Emissions~year+fips,combined, sum)
+
+library(ggplot2)
+##Create PNG file
+png(file="plot6.png", width=480, height=480)
+qplot(year, Emissions, data=LABAL, facets = .~fips)+geom_smooth()
+dev.off()
