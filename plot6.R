@@ -5,8 +5,9 @@ NEI<-readRDS("summarySCC_PM25.rds")
 SCC<-readRDS("Source_Classification_Code.rds")
 
 library(dplyr)
-##Filter to Baltimore and LA
-LABAL<- filter(NEI, fips=="24510" | fips=="06037")
+##Filter to Baltimore
+Bal<- filter(NEI, fips=="24510")
+LA<- filter(NEI, fips=="06037")
 
 ##Identify Motor Vehicles
 library(dplyr)
@@ -20,13 +21,8 @@ MV2<-filter(MV, str_detect(SCC.Level.Two, "Vehicle"))
 codes<-unique(MV2$SCC)
 
 ##Filter data to rows for motor vehicles
-LABALMV<-filter(LABAL, SCC==codes)
+BALMV<-filter(Bal, SCC==codes)
+LAMV<-filter(LA, SCC==codes)
 
 ##Sum by year
-LABALMV2<-aggregate(Emissions~year + fips,LABALMV, sum)
-
-library(ggplot2)
-##Create PNG file
-png(file="plot6.png", width=480, height=480)
-qplot(year, Emissions, data=LABALMV2, facets=.~ fips)+geom_smooth()
-dev.off()
+NEIMV2<-aggregate(Emissions~year,NEIMV, sum)
