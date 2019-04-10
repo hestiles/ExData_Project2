@@ -16,6 +16,6 @@ codes<-unique(SCC2$SCC)
 NEIcoal<-filter(NEI, SCC==codes)
 
 ##Sum by year
-aggregate(Emissions~year+type,Bal, sum)
+aggregate(Emissions~year,NEIcoal, sum)
 
 
