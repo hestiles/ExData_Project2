@@ -16,6 +16,12 @@ codes<-unique(SCC2$SCC)
 NEIcoal<-filter(NEI, SCC==codes)
 
 ##Sum by year
-aggregate(Emissions~year,NEIcoal, sum)
+NEIcoal2<-aggregate(Emissions~year,NEIcoal, sum)
+
+library(ggplot2)
+##Create PNG file
+png(file="plot4.png", width=480, height=480)
+qplot(year, Emissions, data=NEIcoal2)+geom_smooth()
+dev.off()
 
 
