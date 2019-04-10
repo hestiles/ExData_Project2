@@ -21,3 +21,15 @@ codes<-unique(MV2$SCC)
 
 ##Filter data to rows for motor vehicles
 NEIMV<-filter(NEI, SCC==codes)
+
+##Sum by year
+NEIMV2<-aggregate(Emissions~year,NEIMV, sum)
+
+library(ggplot2)
+##Create PNG file
+png(file="plot5.png", width=480, height=480)
+qplot(year, Emissions, data=NEIMV2)+geom_smooth()
+dev.off()
+
+
+
