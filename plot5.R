@@ -20,7 +20,7 @@ MV2<-filter(MV, str_detect(SCC.Level.Two, "Vehicle"))
 codes<-unique(MV2$SCC)
 
 ##Filter data to rows for motor vehicles
-NEIMV<-filter(NEI, SCC==codes)
+NEIMV<-filter(Bal, SCC%in%codes)
 
 ##Sum by year
 NEIMV2<-aggregate(Emissions~year,NEIMV, sum)
