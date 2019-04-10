@@ -15,3 +15,9 @@ MV<-filter(SCC, SCC.Level.One =="Mobile Sources")
 
 library(stringr)
 MV2<-filter(MV, str_detect(SCC.Level.Two, "Vehicle"))
+
+##Identify vehicle codes
+codes<-unique(MV2$SCC)
+
+##Filter data to rows for motor vehicles
+NEIMV<-filter(NEI, SCC==codes)
