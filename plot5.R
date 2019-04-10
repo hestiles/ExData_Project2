@@ -12,3 +12,6 @@ Bal<- filter(NEI, fips=="24510")
 library(dplyr)
 SCC<-as_tibble(SCC)
 MV<-filter(SCC, SCC.Level.One =="Mobile Sources")
+
+library(stringr)
+MV2<-filter(MV, str_detect(SCC.Level.Two, "Vehicle"))
