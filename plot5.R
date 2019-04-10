@@ -3,3 +3,7 @@ unzip("emissions.zip")
 
 NEI<-readRDS("summarySCC_PM25.rds")
 SCC<-readRDS("Source_Classification_Code.rds")
+
+library(dplyr)
+##Filter to Baltimore
+Bal<- filter(NEI, fips=="24510")
