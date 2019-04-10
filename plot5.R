@@ -7,3 +7,8 @@ SCC<-readRDS("Source_Classification_Code.rds")
 library(dplyr)
 ##Filter to Baltimore
 Bal<- filter(NEI, fips=="24510")
+
+##Identify Motor Vehicles
+library(dplyr)
+SCC<-as_tibble(SCC)
+MV<-filter(SCC, SCC.Level.One =="Mobile Sources")
